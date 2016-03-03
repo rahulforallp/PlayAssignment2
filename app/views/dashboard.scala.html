@@ -1,0 +1,54 @@
+@(employeeList:List[Employee])
+
+@main("Dashboard") {
+<div class="row">
+<div class="col-sm-8">
+
+    <h3 >Welcome Rahul</h3>
+
+    <form name="searchEmployees" class="navbar-form navbar-left "  action="@routes.Application.searchEmployeesController" method="POST">
+<input type='text' class="form-control" cols="1" name='empName' placeholder="Search By Name" />
+<input type='submit' class="btn btn-success" name='empSubmit' value='Search Employee' />
+</form>
+
+<div class="container">
+    <div class="row">
+        <div class="table-responsive">
+
+            <table class="table table-hover">
+                <thead>
+                <tr>
+
+                    <th>Nmae</th>
+                    <th>Address</th>
+                    <th>Date Of Birth</th>
+                    <th>Date Of Joining</th>
+                    <th>Designation</th>
+
+                </tr>
+                </thead>
+                <tbody id="myTable">
+                @for(aEmployee <- employeeList){
+                <tr>
+                    <td><a href="@routes.Application.showUpdateEmployeeController">@aEmployee.empName</a></td>
+                    <td>@aEmployee.address</td>
+                    <td>@aEmployee.dateOfBirth</td>
+                    <td>@aEmployee.dateOfJoining</td>
+                    <td>@aEmployee.designation</td>
+                </tr>
+                }
+                </tbody>
+            </table>
+
+        </div>
+        <div class="col-md-12 text-center">
+            <ul class="pagination pagination-lg pager" id="myPager"></ul>
+        </div>
+    </div>
+</div>
+    </div>
+<form action="@routes.Application.showAddEmployeeController" name="showAddEmployee">
+    <div class="col-sm-4"> <br><br><br><input type='submit'  class="btn btn-danger pull-right" name='addEmployee' value='Add New Employee' /></div>
+</form>
+</div>
+}
