@@ -64,12 +64,12 @@ class Application extends Controller {
         val df = new java.text.SimpleDateFormat("dd/MM/yyyy")
         if(!success.dateOfBirth.equals(df.format(df.parse(success.dateOfBirth))))
           {
-            Redirect("/")
+            Redirect("/addEmployee")
           }
 
         if(!success.dateOfJoining.equals(df.format(df.parse(success.dateOfJoining))))
         {
-          Redirect("/")
+          Redirect("/addEmployee")
         }
 
         listOfEmployee.+=(Employee(success.empName,success.address,success.dateOfBirth,success.dateOfJoining,success.designation))
@@ -77,9 +77,10 @@ class Application extends Controller {
       })
   }
 
- def showUpdateEmployeeController = Action{implicit request =>
-    Ok(views.html.updateEmployee(Employee("Rahul Kumar","NSEZ","4/8/1991","21/1/2016","Trainee Software Consultant")))
+ def showUpdateEmployeeController(empName:String) = Action{implicit request =>
+       Ok(views.html.updateEmployee(searchEmployee(empName).toList.head))
   }
+
   def deleteEmployee(emp:Employee)=Action{
     listOfEmployee -= listOfEmployee.filter(_==emp).head
     Ok(views.html.dashboard(listOfEmployee.toList))

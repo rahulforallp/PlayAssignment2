@@ -30,7 +30,7 @@
                 <tbody id="myTable">
                 @for(aEmployee <- employeeList){
                 <tr>
-                    <td><a href="@routes.Application.showUpdateEmployeeController">@aEmployee.empName</a></td>
+                    <td><a href="@routes.Application.showUpdateEmployeeController(aEmployee.empName)">@aEmployee.empName</a></td>
                     <td>@aEmployee.address</td>
                     <td>@aEmployee.dateOfBirth</td>
                     <td>@aEmployee.dateOfJoining</td>
